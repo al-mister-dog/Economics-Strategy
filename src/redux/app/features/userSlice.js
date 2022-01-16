@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import authService from "../../services/auth.service";
+import authService from "../services/auth.service";
 
 export const signupUser = createAsyncThunk(
   "users/signupUser",
@@ -75,8 +75,7 @@ export const logout = createAsyncThunk(
 export const userSlice = createSlice({
   name: "user",
   initialState: {
-    username: "",
-    email: "",
+    user: "",
     isFetching: false,
     isSuccess: false,
     isError: false,
@@ -114,8 +113,7 @@ export const userSlice = createSlice({
     [loginUser.fulfilled]: (state, { payload }) => {
       console.log("fulfilled loginUser");
       console.log(payload);
-      state.email = payload.email;
-      state.username = payload.username;
+      state.user = payload
       state.isFetching = false;
       state.isSuccess = true;
       return state;
