@@ -78,9 +78,10 @@ export default function Home() {
         </Typography>
       </Box>
       <Box className={classes.auth}>
-          <Typography component="h1" variant="h5">
-           Bla
+          <Typography variant="h5" align="justify">
+           {text}
           </Typography>
+          <Typography variant="body1">pecunia, si uti scis, ancilla est; si nescis, domina</Typography>
       </Box>
     </Paper>
   );

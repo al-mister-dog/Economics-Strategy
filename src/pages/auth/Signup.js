@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { signupUser, userSelector, clearState } from "../redux/app/features/userSlice";
+import { signupUser, userSelector, clearState } from "../../redux/app/features/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -13,7 +13,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 
-import owl from "./__owl.jpeg";
+import owl from "../__owl.jpeg";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

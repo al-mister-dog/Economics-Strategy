@@ -1,19 +1,17 @@
-import { useSelector, useDispatch } from "react-redux";
-import { navSelector, setDepartment, setDepartmentOperation } from "./redux/app/features/nav/navSlice";
-import {useEffect} from "react"
-import "./App.css";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/styles";
+import theme from "./styles/Theme";
+import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/nav/Navbar"
 import AppRoutes from "./routes/routes"
 
 function App() {
   return (
-    <div className="App">
+    <ThemeProvider theme={theme}>
       <Router>
       <Navbar />
         <AppRoutes />
       </Router>
-    </div>
+    </ThemeProvider>
   );
 }
 export default App;

@@ -7,9 +7,7 @@ import {
   ListItemText,
   makeStyles
 } from "@material-ui/core";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-const darkPrimary = "#191919";
+
 const useStyles = makeStyles(() => ({
   menuItem: {
     // color: "white",
@@ -22,12 +20,12 @@ export default function MainMenu({departments, getDepartment}) {
   return (
     <>
       <List className={classes.menuItem}>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+        {["Game", "Mode", "Goes", "Here"].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon className={classes.menuItem}>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
+            <Link key={index} style={{ textDecoration: 'none', color: "black" }} to="/game">
             <ListItemText primary={/*<p style={{fontWeight: bold  margin: "0px"}}>{text}</p>}*/text}/>
+            </Link>
+            
           </ListItem>
         ))}
       </List>
