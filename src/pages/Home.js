@@ -1,15 +1,5 @@
-import {
-  Paper,
-  Avatar,
-  Button,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Grid,
-  Box,
-  Typography,
-  makeStyles,
-} from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { Paper, Button, Box, Typography, makeStyles } from "@material-ui/core";
 
 import owl from "./__owl.jpeg";
 
@@ -33,11 +23,9 @@ const useStyles = makeStyles((theme) => ({
   welcome: {
     width: "50%",
     "@media (max-width: 620px)": {
-      padding: "10px",
-      // display: "flex",
-      // alignItems: "center",
-      width: "90%",
       margin: "auto",
+      padding: "10px",
+      width: "90%",
     },
   },
   img: {
@@ -47,26 +35,38 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     "@media (max-width: 620px)": {
-      // fontSize: "1.5rem"
-      display: "none",
+      fontSize: "1.4rem",
     },
   },
   auth: {
     width: "50%",
-    marginTop: 8,
+    margin: "auto",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     "@media (max-width: 620px)": {
-      marginTop: 4,
+      marginTop: 0,
       width: "90%",
       margin: "auto",
+    },
+  },
+  slogan: {
+    fontSize: "1.4rem",
+    "@media (max-width: 620px)": {
+      fontSize: "0.8rem",
+    },
+  },
+  sloganLatin: {
+    margin: "10px",
+    "@media (max-width: 620px)": {
+      fontSize: "0.6rem",
+      color: "f7f7f7",
     },
   },
 }));
 
 export default function Home() {
-  const classes = useStyles()
+  const classes = useStyles();
   const text =
     "What is money? Take control of the monetary and financial system and find out.";
   return (
@@ -78,10 +78,24 @@ export default function Home() {
         </Typography>
       </Box>
       <Box className={classes.auth}>
-          <Typography variant="h5" align="justify">
-           {text}
-          </Typography>
-          <Typography variant="body1">pecunia, si uti scis, ancilla est; si nescis, domina</Typography>
+        <Typography className={classes.slogan} align="justify">
+          {text}
+        </Typography>
+        <Typography className={classes.sloganLatin} variant="body1">
+          pecunia, si uti scis, ancilla est; si nescis, domina
+        </Typography>
+        <Box sx={{ display: "flex", marginTop: "25px" }}>
+          <Link to="login" style={{textDecoration: "none", color: "white"}}>
+            <Button color="primary" variant="contained" style={{ margin: 10 }}>
+              Login
+            </Button>
+          </Link>
+          <Link to="signup" style={{textDecoration: "none", color: "white"}}>
+            <Button color="primary" variant="contained" style={{ margin: 10 }}>
+              Signup
+            </Button>
+          </Link>
+        </Box>
       </Box>
     </Paper>
   );

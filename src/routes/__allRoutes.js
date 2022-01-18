@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
 import { navSelector, setDepartment, setDepartmentOperation } from "../redux/app/features/nav/navSlice";
-import { userSelector } from "../redux/app/features/userSlice";
 import {useEffect} from "react"
 import {Routes, Route, useLocation } from "react-router-dom";
 import keysData from "../data/performance"
@@ -52,7 +51,6 @@ import Balances from "../pages/treasury/balances/Main"
 function App() {
   const dispatch = useDispatch()
   const { departments } = useSelector(navSelector)
-  const { user } = useSelector(userSelector)
   function usePageViews() {
     let location = useLocation();
     useEffect(() => {
