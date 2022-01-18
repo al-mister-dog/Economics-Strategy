@@ -109,7 +109,7 @@ export default function Navbar() {
         >
           <MenuIcon />
         </IconButton>
-        <Link to="home" style={{textDecoration: "none", color: "white"}}>
+        <Link to="/" style={{textDecoration: "none", color: "white"}}>
         <Typography variant="h4" className={classes.title}>
           Trial of the Pyx
         </Typography>

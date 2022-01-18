@@ -37,7 +37,7 @@ export default function CentralBank() {
   return (
     <Paper elevation={0} className={classes.paper}>
       <GameForm />
-      <GameDashboard />
+      {/* <GameDashboard /> */}
     </Paper>
   );
 }

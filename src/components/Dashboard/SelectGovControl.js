@@ -1,5 +1,20 @@
+import { Box, Typography, Slider } from "@material-ui/core";
 export default function SelectGovControl() {
   return (
-    <h1>Choose amount of government control</h1>
-  )
+    <>
+    <Typography>Choose amount of governmental control</Typography>
+      <Box sx={{ width: 300, margin: "auto", marginTop: "20px" }}>
+        <Slider
+          aria-label="Small steps"
+          defaultValue={0.00000005}
+          // getAriaValueText={valuetext}
+          step={1}
+          marks
+          min={0}
+          max={5}
+          valueLabelDisplay="auto"
+        />
+      </Box>
+    </>
+  );
 }
