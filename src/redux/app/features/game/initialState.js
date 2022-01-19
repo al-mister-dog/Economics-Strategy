@@ -2,7 +2,7 @@ const initialState = {
   country: "",
   tradeBloc: "",
   alliance: "",
-  governmentControl: "",
+  governmentControl: 0,
   gameSettings: {},
 };
 

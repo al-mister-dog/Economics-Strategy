@@ -1,8 +1,11 @@
+import {useSelector, useDispatch} from "react-redux";
+import { gameSelector, setGame } from "../../redux/app/features/game/gameSlice";
+import { userSelector } from "../../redux/app/features/userSlice";
 import React from "react";
-import SelectCountry from "./SelectCountry"
-import SelectTradeBloc from "./SelectTradeBloc"
-import SelectAlliance from "./SelectAlliance"
-import SelectGovControl from "./SelectGovControl"
+import SelectCountry from "./SelectCountry";
+import SelectTradeBloc from "./SelectTradeBloc";
+import SelectAlliance from "./SelectAlliance";
+import SelectGovControl from "./SelectGovControl";
 import {
   Box,
   Button,
@@ -12,13 +15,6 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
-export default function GameForm() {
-  return (
-    <Box>
-      <HorizontalLinearStepper/>
-    </Box>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,8 +29,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+export default function GameForm() {
+  const {user} = useSelector(userSelector)
+  console.log(user)
+  return (
+    <Box>
+      <Typography variant="h6" style={{marginBottom: "25px"}}>Hi, {user.username}. Its to time to take charge of your nation's economy...</Typography>
+      <HorizontalLinearStepper />
+    </Box>
+  );
+}
+
 function getSteps() {
-  return ["Select country", "Join trade bloc", "Create alliance", "Choose governmental control"];
+  return [
+    "Select country",
+    "Join trade bloc",
+    "Create alliance",
+    "Choose governmental control",
+  ];
 }
 
 function getStepContent(step) {
@@ -45,7 +57,7 @@ function getStepContent(step) {
       return <SelectTradeBloc />;
     case 2:
       return <SelectAlliance />;
-      case 3:
+    case 3:
       return <SelectGovControl />;
     default:
       return "Unknown step";
@@ -53,6 +65,12 @@ function getStepContent(step) {
 }
 
 function HorizontalLinearStepper() {
+  const dispatch = useDispatch()
+  const {country} = useSelector(gameSelector)
+  const {tradeBloc} = useSelector(gameSelector)
+  const {alliance} = useSelector(gameSelector)
+  const {governmentControl} = useSelector(gameSelector)
+  const {user} = useSelector(userSelector)
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
@@ -100,9 +118,13 @@ function HorizontalLinearStepper() {
     setActiveStep(0);
   };
 
+  const handleStart = () => {
+    dispatch(setGame({country, tradeBloc, alliance, governmentControl, user}))
+  };
+
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep}>
+      <Stepper activeStep={activeStep} style={{backgroundColor: "#fdfbf7", marginBottom: "25px"}}>
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
@@ -123,20 +145,35 @@ function HorizontalLinearStepper() {
       </Stepper>
       <div>
         {activeStep === steps.length ? (
-          <div>
+          <div style={{marginBottom: "25px"}}>
             <Typography className={classes.instructions}>
               All steps completed - you&apos;re finished
             </Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Reset
-            </Button>
+            <div style={{marginTop: "25px"}}>
+              <Button
+                onClick={handleReset}
+                className={classes.button}
+                style={{ margin: "5px" }}
+              >
+                Reset
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleStart}
+                className={classes.button}
+                style={{ margin: "5px" }}
+              >
+                Start Game
+              </Button>
+            </div>
           </div>
         ) : (
-          <div>
+          <div style={{marginBottom: "25px"}}>
             <Typography className={classes.instructions}>
               {getStepContent(activeStep)}
             </Typography>
-            <div>
+            <div style={{marginTop: "25px"}}>
               <Button
                 disabled={activeStep === 0}
                 onClick={handleBack}
@@ -158,6 +195,7 @@ function HorizontalLinearStepper() {
               <Button
                 variant="contained"
                 color="primary"
+                disabled={!country}
                 onClick={handleNext}
                 className={classes.button}
               >
@@ -167,6 +205,11 @@ function HorizontalLinearStepper() {
           </div>
         )}
       </div>
+      {activeStep === 0 && <Typography align="justify" style={{marginTop: "25px"}}>Each country comes with its own benifits and drawbacks. However in the real world, not all benifits and drawbacks are created equally. For example your country's debt may be denominated in a foreign currency, tying your hands as to how much your government can spend...</Typography>}
+      {activeStep === 1 && <Typography align="justify" style={{marginTop: "25px"}}>Joining a trade bloc may help with easing the cost of exports. You may be restricted by your geographical location...</Typography>}
+      {activeStep === 2 && <Typography align="justify" style={{marginTop: "25px"}}>Joining an alliance may give your country a few economic perks, but if the relationship is unbalanced you may find that implementing reforms can come with disapproval or even worse, economic sanctions</Typography>}
+      {activeStep === 3 && <Typography align="justify" style={{marginTop: "25px"}}>The interesting part. Put your political ideology to the test. Will deregulation really encourage growth? Will complete control of the monetary base free your country or plunge it into debt? Will a free market of banks flourish or will a monopoly inevitably emerge?</Typography>}
     </div>
+    
   );
 }

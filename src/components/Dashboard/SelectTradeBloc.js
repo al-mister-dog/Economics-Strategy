@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { gameSelector } from "../../redux/app/features/game/gameSlice";
 import { setTradeBloc } from "../../redux/app/features/game/gameSlice";
 import { useState } from "react";
 import { Typography, FormControl, Select, MenuItem } from "@material-ui/core";
@@ -17,9 +18,9 @@ export default function SelectTradeBloc() {
     "SADC",
   ];
   const dispatch = useDispatch();
+  const {tradeBloc} = useSelector(gameSelector)
   const [value, setValue] = useState("");
   const handleChange = (e) => {
-    //decide whether to import whole country or just the iso + name
     dispatch(setTradeBloc(e.target.value));
     setValue(e.target.value);
   };
@@ -30,11 +31,11 @@ export default function SelectTradeBloc() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={value}
+          value={value || tradeBloc}
           onChange={handleChange}
         >
           {blocs.map((bloc) => {
-            return <MenuItem value={bloc}>{bloc}</MenuItem>;
+            return <MenuItem key={bloc} value={bloc}>{bloc}</MenuItem>;
           })}
         </Select>
       </FormControl>

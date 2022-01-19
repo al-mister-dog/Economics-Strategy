@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { setAlliance } from "../../redux/app/features/game/gameSlice";
+import { gameSelector } from "../../redux/app/features/game/gameSlice";
 import { useState } from "react";
 import { Typography, FormControl, Select, MenuItem } from "@material-ui/core";
 
@@ -13,6 +14,7 @@ export default function SelectAlliance() {
     "NATO",
   ];
   const dispatch = useDispatch();
+  const {alliance} = useSelector(gameSelector)
   const [value, setValue] = useState("");
   const handleChange = (e) => {
     //decide whether to import whole country or just the iso + name
@@ -26,11 +28,11 @@ export default function SelectAlliance() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={value}
+          value={value || alliance}
           onChange={handleChange}
         >
           {blocs.map((bloc) => {
-            return <MenuItem value={bloc}>{bloc}</MenuItem>;
+            return <MenuItem key={bloc} value={bloc}>{bloc}</MenuItem>;
           })}
         </Select>
       </FormControl>

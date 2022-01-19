@@ -1,14 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { setCountry } from "../../redux/app/features/game/gameSlice";
 import { countriesSelector } from "../../redux/app/features/countries/countriesSlice";
-// import { gameSelector } from "../../redux/app/features/game/gameSlice";
+import { gameSelector } from "../../redux/app/features/game/gameSlice";
 import { useState } from "react";
 import { Typography, FormControl, Select, MenuItem } from "@material-ui/core";
 
 export default function SelectCountry() {
   const dispatch = useDispatch();
   const { countries } = useSelector(countriesSelector);
-  // const { country } = useSelector(gameSelector);
+  const { country } = useSelector(gameSelector);
   // console.log("country" + country.NAME);
   const [value, setValue] = useState("");
   const handleChange = (e) => {
@@ -23,12 +23,12 @@ export default function SelectCountry() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={value}
+          value={value || country}
           onChange={handleChange}
         >
           {countries.map((country) => {
             const { iso, NAME } = country;
-            return <MenuItem value={country}>{NAME}</MenuItem>;
+            return <MenuItem key={iso} value={country}>{NAME}</MenuItem>;
           })}
         </Select>
       </FormControl>

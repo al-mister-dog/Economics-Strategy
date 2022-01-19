@@ -6,8 +6,7 @@ export default function SelectGovControl() {
       <Box sx={{ width: 300, margin: "auto", marginTop: "20px" }}>
         <Slider
           aria-label="Small steps"
-          defaultValue={0.00000005}
-          // getAriaValueText={valuetext}
+          defaultValue={0}
           step={1}
           marks
           min={0}
