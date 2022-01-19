@@ -1,7 +1,10 @@
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { userSelector } from "../redux/app/features/userSlice";
+import { Link, useNavigate } from "react-router-dom";
 import { Paper, Button, Box, Typography, makeStyles } from "@material-ui/core";
 
 import owl from "./__owl.jpeg";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -66,9 +69,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Home() {
+  const {user} = useSelector(userSelector)
   const classes = useStyles();
   const text =
     "What is money? Take control of the monetary and financial system and find out.";
+    const navigate = useNavigate();
+    useEffect(() => {
+      if (user) {
+        navigate('dashboard')
+      }
+    }, [user])
   return (
     <Paper className={classes.paper}>
       <Box className={classes.welcome}>

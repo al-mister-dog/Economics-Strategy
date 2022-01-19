@@ -5,20 +5,33 @@ export const setGame = createAsyncThunk(
   "game/setGame",
   async ({ country, tradeBloc, alliance, governmentControl, user }) => {
     try {
-      fetch("http://localhost:3002/api/v1/game/setgame", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          country,
+      const response = await fetch(
+        "http://localhost:3002/api/v1/game/setgame",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            country,
+            tradeBloc,
+            alliance,
+            governmentControl,
+            userId: user.id,
+          }),
+        }
+      );
+      if (response.status === 200) {
+        return {
+          country: country.iso,
           tradeBloc,
           alliance,
           governmentControl,
+          data: country,
           userId: user.id,
-        }),
-      });
+        };
+      }
     } catch (error) {
       console.log(error);
     }
@@ -55,11 +68,11 @@ export const setGame = createAsyncThunk(
 const saveGame = createAsyncThunk(
   "game/saveGame"
   //update game data. probably the data row
+  //GAME SHOULD BE SAVED WHENEVER GAME DATA CHANGES// MAYBE ON APP OR ROUTER PAGE
 );
 
-const deleteGame =
-  createAsyncThunk();
-  //delete game instance
+const deleteGame = createAsyncThunk();
+//delete game instance
 
 const gameSlice = createSlice({
   name: "game",
@@ -79,7 +92,8 @@ const gameSlice = createSlice({
     },
   },
   extraReducers: {
-    [setGame.fulfilled]: (state) => {
+    [setGame.fulfilled]: (state, { payload }) => {
+      state.gameData = payload;
       state.gameIsActivated = true;
       state.isFetching = false;
     },
@@ -93,7 +107,7 @@ const gameSlice = createSlice({
       state.isError = true;
     },
     // [getGame.fulfilled]: (state, { payload }) => {
-    //   state.gameSettings = payload;
+    //   state.gameData = payload;
     //   state.gameIsActivated = true;
     //   state.isFetching = false;
     // },

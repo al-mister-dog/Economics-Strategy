@@ -6,7 +6,7 @@ const initialState = {
   gameIsActivated: false,
   isFetching: false,
   isError: true,
-  gameSettings: {},
+  gameData: {},
 };
 
 export default initialState;

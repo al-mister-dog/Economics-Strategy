@@ -27,20 +27,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CentralBank() {
   const { user, isFetching, isError } = useSelector(userSelector);
-  const { gameSettings } = useSelector(gameSelector);
+  const { gameData } = useSelector(gameSelector);
   const dispatch = useDispatch();
 
   const classes = useStyles();
 
-  useEffect(() => {
-    dispatch(fetchUserByToken({ token: localStorage.getItem("token") }));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchUserByToken({ token: localStorage.getItem("token") }));
+  // }, []);
 
-  useEffect(() => {});
+  useEffect(() => {console.log(gameData)}, [gameData]);
 
   return (
     <Paper elevation={0} className={classes.paper}>
-      {gameSettings ? <GameForm /> : <GameDashboard />}
+      {gameData ?  <GameDashboard /> : <GameForm /> }
     </Paper>
   );
 }
