@@ -1,8 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import {
   userSelector,
-  fetchUserBytoken,
+  fetchUserByToken,
 } from "../../redux/app/features/userSlice";
+import { gameSelector } from "../../redux/app/features/game/gameSlice";
 import { useEffect } from "react";
 import { Paper, makeStyles } from "@material-ui/core";
 
@@ -26,18 +27,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CentralBank() {
   const { user, isFetching, isError } = useSelector(userSelector);
+  const { gameSettings } = useSelector(gameSelector);
   const dispatch = useDispatch();
 
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch(fetchUserBytoken({ token: localStorage.getItem("token") }));
+    dispatch(fetchUserByToken({ token: localStorage.getItem("token") }));
   }, []);
+
+  useEffect(() => {});
 
   return (
     <Paper elevation={0} className={classes.paper}>
-      <GameForm />
-      {/* <GameDashboard /> */}
+      {gameSettings ? <GameForm /> : <GameDashboard />}
     </Paper>
   );
 }

@@ -46,7 +46,7 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const fetchUserBytoken = createAsyncThunk(
+export const fetchUserByToken = createAsyncThunk(
   "users/fetchUserByToken",
   async ({ token }, thunkAPI) => {
     try {
@@ -96,8 +96,6 @@ export const userSlice = createSlice({
       console.log("payload", payload);
       state.isFetching = false;
       state.isSuccess = true;
-      // state.email = payload.email;
-      // state.username = payload.username;
     },
     [signupUser.pending]: (state) => {
       console.log("pending signupUser");
@@ -128,20 +126,21 @@ export const userSlice = createSlice({
       console.log("pending loginUser");
       state.isFetching = true;
     },
-    [fetchUserBytoken.pending]: (state) => {
+    [fetchUserByToken.pending]: (state) => {
       console.log("pending fetchUserByToken");
       state.isFetching = true;
     },
-    [fetchUserBytoken.fulfilled]: (state, { payload }) => {
+    [fetchUserByToken.fulfilled]: (state, { payload }) => {
       console.log("fulfilled fetchUserByToken");
+      state.user = payload
       state.isFetching = false;
       state.isSuccess = true;
 
       state.email = payload.email;
       state.username = payload.name;
     },
-    [fetchUserBytoken.rejected]: (state) => {
-      console.log("rejected fetchUserBytoken");
+    [fetchUserByToken.rejected]: (state) => {
+      console.log("rejected fetchUserByToken");
       state.isFetching = false;
       state.isError = true;
     },

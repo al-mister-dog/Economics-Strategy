@@ -34,7 +34,7 @@ const fetchUserByToken = (token) => {
     method: "GET",
     headers: {
       Accept: "application/json",
-      Authorization: token,
+      token,
       "Content-Type": "application/json",
     },
   });

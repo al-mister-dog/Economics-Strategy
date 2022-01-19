@@ -4,6 +4,9 @@ import {
   setDepartment,
   setDepartmentOperation,
 } from "../redux/app/features/nav/navSlice";
+import {
+  fetchUserByToken
+} from "../redux/app/features/userSlice"
 import { userSelector } from "../redux/app/features/userSlice";
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -80,6 +83,9 @@ function App() {
       }
     }, [location]);
   }
+  useEffect(() => {
+    dispatch(fetchUserByToken({ token: localStorage.getItem("token") }));
+  }, []);
   // const loggedin = false;
   usePageViews();
   return (

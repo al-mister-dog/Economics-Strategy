@@ -3,6 +3,9 @@ const initialState = {
   tradeBloc: "",
   alliance: "",
   governmentControl: 0,
+  gameIsActivated: false,
+  isFetching: false,
+  isError: true,
   gameSettings: {},
 };
 

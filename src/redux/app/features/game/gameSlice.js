@@ -20,24 +20,46 @@ export const setGame = createAsyncThunk(
         }),
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 );
 
-const getGame = createAsyncThunk(
-  "game/getGame",
-  //retrieve game data
-)
+// const getGame = createAsyncThunk("game/getGame", async ({ user }, thunkAPI) => {
+//   try {
+//     const response = fetch("http://localhost:3002/api/v1/game/getgame", {
+//       method: "POST",
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         userId: user.id,
+//       }),
+//     });
+//     let data = await response.json();
+//       console.log("data", data);
+
+//       if (response.status === 200) {
+//         return { ...data };
+//       } else {
+//         console.log("response is something else");
+//         console.log(data);
+//         return thunkAPI.rejectWithValue(data);
+//       }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 const saveGame = createAsyncThunk(
-  "game/saveGame",
+  "game/saveGame"
   //update game data. probably the data row
-)
+);
 
-const deleteGame = createAsyncThunk(
+const deleteGame =
+  createAsyncThunk();
   //delete game instance
-)
 
 const gameSlice = createSlice({
   name: "game",
@@ -57,9 +79,33 @@ const gameSlice = createSlice({
     },
   },
   extraReducers: {
-    [setGame.fulfilled]: (state, { payload }) => {
-      console.log("hello from extra reducer");
+    [setGame.fulfilled]: (state) => {
+      state.gameIsActivated = true;
+      state.isFetching = false;
     },
+    [setGame.pending]: (state) => {
+      state.gameIsActivated = false;
+      state.isFetching = true;
+    },
+    [setGame.rejected]: (state) => {
+      state.gameIsActivated = false;
+      state.isFetching = false;
+      state.isError = true;
+    },
+    // [getGame.fulfilled]: (state, { payload }) => {
+    //   state.gameSettings = payload;
+    //   state.gameIsActivated = true;
+    //   state.isFetching = false;
+    // },
+    // [getGame.pending]: (state) => {
+    //   state.gameIsActivated = false;
+    //   state.isFetching = true;
+    // },
+    // [getGame.rejected]: (state) => {
+    //   state.gameIsActivated = false;
+    //   state.isFetching = false;
+    //   state.isError = true;
+    // },
   },
 });
 

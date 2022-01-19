@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GameForm() {
   const {user} = useSelector(userSelector)
-  console.log(user)
+  
   return (
     <Box>
       <Typography variant="h6" style={{marginBottom: "25px"}}>Hi, {user.username}. Its to time to take charge of your nation's economy...</Typography>
@@ -44,7 +44,7 @@ function getSteps() {
   return [
     "Select country",
     "Join trade bloc",
-    "Create alliance",
+    "Join alliance",
     "Choose governmental control",
   ];
 }
