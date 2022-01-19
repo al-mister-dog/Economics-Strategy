@@ -1,14 +1,8 @@
-import { useSelector, useDispatch } from "react-redux";
-import {
-  userSelector,
-  fetchUserByToken,
-} from "../../redux/app/features/userSlice";
+import { useSelector } from "react-redux";
 import { gameSelector } from "../../redux/app/features/game/gameSlice";
-import { useEffect } from "react";
-import { Paper, makeStyles } from "@material-ui/core";
-
 import GameForm from "../../components/Dashboard/GameForm";
 import GameDashboard from "../../components/Dashboard/GameDashboard";
+import { Paper, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -26,21 +20,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CentralBank() {
-  const { user, isFetching, isError } = useSelector(userSelector);
   const { gameData } = useSelector(gameSelector);
-  const dispatch = useDispatch();
-
   const classes = useStyles();
-
-  // useEffect(() => {
-  //   dispatch(fetchUserByToken({ token: localStorage.getItem("token") }));
-  // }, []);
-
-  useEffect(() => {console.log(gameData)}, [gameData]);
-
   return (
     <Paper elevation={0} className={classes.paper}>
-      {gameData ?  <GameDashboard /> : <GameForm /> }
+      {Object.keys(gameData).length ? <GameDashboard /> : <GameForm />}
     </Paper>
   );
 }

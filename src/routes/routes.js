@@ -55,7 +55,7 @@ import Balances from "../pages/treasury/balances/Main";
 function App() {
   const dispatch = useDispatch();
   const { departments } = useSelector(navSelector);
-  const { user } = useSelector(userSelector);
+  const { user, isFetching } = useSelector(userSelector);
   function usePageViews() {
     let location = useLocation();
     useEffect(() => {
