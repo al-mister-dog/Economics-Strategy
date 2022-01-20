@@ -1,20 +1,27 @@
 import { useSelector } from "react-redux";
 import {gameSelector} from "../../../redux/app/features/game/gameSlice"
 import Reserves from "./charts/Reserves"
-
-import { Box, Button } from "@material-ui/core";
+import Inflation from "./charts/Inflation"
+import Policy from "./charts/Policy"
+import { Box, Typography, Button } from "@material-ui/core";
 
 export default function GameDashboard() {
   const {gameData} = useSelector(gameSelector);
   console.log(gameData)
   return (
-    <Box>
+    <Box sx={{display: "flex"}}>
+      <Box sx={{display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", width: "65%", border: "1px solid black"}}>
       <Reserves/>
-      <h1>game dashboard</h1>
-      <p>{gameData.data.NAME}</p>
-      <p>{gameData.tradeBloc}</p>
-      <p>{gameData.alliance}</p>
-      <p>{gameData.governmentControl}</p>
+      <Inflation/>
+      <Policy/>
+      </Box>
+      <Box sx={{width: "35%", display: "flex", flexDirection: "column"}}>
+<Typography>item</Typography>
+<Typography>item</Typography>
+<Typography>item</Typography>
+      <Typography>item</Typography>
+      </Box>
+      
     </Box>
   );
 }

@@ -27,8 +27,8 @@ const data = [
 export default function Reserves() {
   return (
     <>
-      <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", border: "1px solid black", width: "50%"}}>
-        <Typography>Reserves</Typography>
+      <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", border: "1px solid black", width: "45%"}}>
+        <Typography style={{fontWeight: "bold"}}>Reserves: $135000mn</Typography>
         <ResponsiveContainer width={200} height={200}>
         <PieChart>
           <Pie
