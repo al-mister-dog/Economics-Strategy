@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import { setAlliance } from "../../redux/app/features/game/gameSlice";
-import { gameSelector } from "../../redux/app/features/game/gameSlice";
+import { setAlliance } from "../../../redux/app/features/game/gameSlice";
+import { gameSelector } from "../../../redux/app/features/game/gameSlice";
 import { useState } from "react";
 import { Typography, FormControl, Select, MenuItem } from "@material-ui/core";
 

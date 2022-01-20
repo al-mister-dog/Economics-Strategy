@@ -1,6 +1,6 @@
 import {useSelector, useDispatch} from "react-redux";
-import { gameSelector, setGame } from "../../redux/app/features/game/gameSlice";
-import { userSelector } from "../../redux/app/features/userSlice";
+import { gameSelector, setGame } from "../../../redux/app/features/game/gameSlice";
+import { userSelector } from "../../../redux/app/features/userSlice";
 import React from "react";
 import SelectCountry from "./SelectCountry";
 import SelectTradeBloc from "./SelectTradeBloc";

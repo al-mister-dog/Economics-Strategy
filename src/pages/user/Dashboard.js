@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { gameSelector } from "../../redux/app/features/game/gameSlice";
-import GameForm from "../../components/Dashboard/GameForm";
-import GameDashboard from "../../components/Dashboard/GameDashboard";
+import GameForm from "../../components/Dashboard/form/GameForm";
+import GameDashboard from "../../components/Dashboard/dashboard/GameDashboard";
 import { Paper, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({

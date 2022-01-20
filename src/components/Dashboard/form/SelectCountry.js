@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
-import { setCountry } from "../../redux/app/features/game/gameSlice";
-import { countriesSelector } from "../../redux/app/features/countries/countriesSlice";
-import { gameSelector } from "../../redux/app/features/game/gameSlice";
+import { setCountry } from "../../../redux/app/features/game/gameSlice";
+import { countriesSelector } from "../../../redux/app/features/countries/countriesSlice";
+import { gameSelector } from "../../../redux/app/features/game/gameSlice";
 import { useState } from "react";
 import { Typography, FormControl, Select, MenuItem } from "@material-ui/core";
 

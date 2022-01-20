@@ -1,8 +1,15 @@
+import { useDispatch } from "react-redux";
+import { setGovernmentControl } from "../../../redux/app/features/game/gameSlice";
+import { useState } from "react";
 import { Box, Typography, Slider } from "@material-ui/core";
 export default function SelectGovControl() {
+  const dispatch = useDispatch();
+  const handleChange = (e, value) => {
+    dispatch(setGovernmentControl(value));
+  };
   return (
     <>
-    <Typography>Choose amount of governmental control</Typography>
+      <Typography>Choose amount of governmental control</Typography>
       <Box sx={{ width: 300, margin: "auto", marginTop: "20px" }}>
         <Slider
           aria-label="Small steps"
@@ -12,6 +19,7 @@ export default function SelectGovControl() {
           min={0}
           max={5}
           valueLabelDisplay="auto"
+          onChange={handleChange}
         />
       </Box>
     </>
